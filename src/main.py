@@ -1,15 +1,7 @@
 """
 Single-Click Assistant for Paralyzed Patients
-An Eye-Blink Controlled Smart Assistance and Caregiver Alert System
-Department of Electronics and Communication Engineering, National Institute of Technology, Manipur (2026-27)
-
-Authors:
-1) Gaurav Kumar Chaudhary (23105026)
-2) Rahul Deb (23105031)
-3) Dilkhush Raj (23105008)
-
-Under the Guidance of:
-Prof. L. Lolitkumar Singh, Dept. of ECE, NIT Manipur
+Real-Time Eye-Blink Controlled Assistive Workstation & IoT Caregiver Alert System
+Author: Dilkhush Raj
 """
 
 import cv2
@@ -24,11 +16,9 @@ def main():
     config = load_config()
 
     print("=" * 72)
-    print(" NATIONAL INSTITUTE OF TECHNOLOGY, MANIPUR")
-    print(" Department of Electronics and Communication Engineering (2026-27)")
     print(" Single-Click Assistant for Paralyzed Patients")
-    print(" Eye-Blink Controlled Smart Assistance & Caregiver Alert System")
-    print(" Team: Gaurav Kr. Chaudhary, Rahul Deb, Dilkhush Raj | Guide: Prof. L. Lolitkumar Singh")
+    print(" Eye-Blink Controlled Smart Assistance & IoT Caregiver Alert System")
+    print(" Lead Developer: Dilkhush Raj")
     print("=" * 72)
 
     # 1. Initialize Camera Stream (Slide 11: Step 1 Frame Capture)
@@ -97,7 +87,7 @@ def main():
                 hold_status
             )
 
-            cv2.imshow("Single-Click Assistant - Assistive View [NIT Manipur]", display_frame)
+            cv2.imshow("Single-Click Assistant - Assistive View", display_frame)
 
             # Keybindings for manual keyboard simulation / exit
             key = cv2.waitKey(1) & 0xFF

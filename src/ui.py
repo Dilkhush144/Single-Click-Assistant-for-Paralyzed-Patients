@@ -46,7 +46,7 @@ class AssistiveUI:
         cv2.addWeighted(header_overlay, 0.85, frame, 0.15, 0, frame)
 
         # Title
-        cv2.putText(frame, "Single-Click Assistant | NIT Manipur", (15, 28),
+        cv2.putText(frame, "Single-Click Assistive Workstation", (15, 28),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
 
         # Breadcrumb trail

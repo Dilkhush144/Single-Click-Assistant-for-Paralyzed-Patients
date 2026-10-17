@@ -1,8 +1,6 @@
 """
-Configuration parameters for Single-Click Assistant for Paralyzed Patients
-Project: NIT Manipur - Dept. of Electronics and Communication Engineering (2026-27)
-Team: Gaurav Kumar Chaudhary (23105026), Rahul Deb (23105031), Dilkhush Raj (23105008)
-Advisor: Prof. L. Lolitkumar Singh
+System configuration parameters for Single-Click Assistant for Paralyzed Patients
+Author: Dilkhush Raj
 """
 
 import json

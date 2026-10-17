@@ -1,53 +1,55 @@
 # 👁️ Single-Click Assistant for Paralyzed Patients
-### *An Eye-Blink Controlled Smart Assistance and Caregiver Alert System*
+### *Real-Time Eye-Blink Controlled Assistive Workstation & IoT Caregiver Alert System*
 
 <p align="center">
-  <strong>National Institute of Technology, Manipur</strong><br>
-  Department of Electronics and Communication Engineering • B.Tech Project (2026–27)
+  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/OpenCV-4.8+-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" />
+  <img src="https://img.shields.io/badge/MediaPipe-FaceMesh-00C7B7?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Raspberry%20Pi-4B-C51A4A?style=for-the-badge&logo=raspberrypi&logoColor=white" />
+  <img src="https://img.shields.io/badge/Architecture-Mealy%20%2B%20Moore%20FSM-FF6F00?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" />
 </p>
 
 <p align="center">
-  <strong>Project Team:</strong><br>
-  1. <strong>Gaurav Kumar Chaudhary</strong> (Roll: 23105026)<br>
-  2. <strong>Rahul Deb</strong> (Roll: 23105031)<br>
-  3. <strong>Dilkhush Raj</strong> (Roll: 23105008)<br><br>
-  <strong>Under the Guidance of:</strong><br>
-  <strong>Prof. L. Lolitkumar Singh</strong><br>
-  Department of Electronics and Communication Engineering, NIT Manipur
+  <strong>An edge-optimized assistive communication workstation enabling motor-impaired and locked-in patients to control home appliances, communicate routine needs, and dispatch prioritized caregiver alerts through calibrated ocular blinks.</strong>
+</p>
+
+<p align="center">
+  <strong>Author & Lead Developer:</strong> Dilkhush Raj (<a href="https://github.com/Dilkhush144">@Dilkhush144</a>)
 </p>
 
 ---
 
-## 📌 Problem Statement & Motivation
+## 📌 Problem Statement & Engineering Motivation
 
-Severe paralysis (caused by Amyotrophic Lateral Sclerosis [ALS], brainstem stroke, or Locked-in Syndrome) robs patients of speech and limb movement while voluntary eye control remains functional. 
+Patients suffering from severe neuro-motor disorders (such as **Amyotrophic Lateral Sclerosis [ALS]**, brainstem stroke, or quadriplegia) frequently experience complete loss of voluntary muscular control and speech, while ocular motor functions (eyelid blinks) remain fully intact.
 
-Conventional calling buzzers only signal *that* assistance is needed, but cannot specify *what* the patient needs. Existing solutions often suffer from high cost, intrusive electrode headsets, or dependency on uninterrupted internet connectivity.
+Traditional hospital nurse-call buttons fail because paralyzed individuals cannot physically exert pressure. Meanwhile, existing assistive eye-trackers often require expensive infrared hardware, cumbersome electrodes, or continuous high-bandwidth internet connectivity.
 
-This project delivers a **standalone, non-invasive eye-blink assistance workstation** that:
-1. Detects intentional eye blinks in real time using high-speed vision pipelines.
-2. Implements a **hierarchical spoken menu** (Needs, Emergency, Entertainment, Room Control).
-3. Reads items aloud so **no screen is strictly required** for the patient (eyes-free operation).
-4. Automates home appliances (room lighting & fan speed) and triggers offline local alarms alongside caregiver alerts.
+This project delivers a **standalone, edge-computable, non-invasive assistive workstation**:
+1. Tracks involuntary vs. intentional eye blinks in real time using edge computer vision.
+2. Formulates a **hierarchical spoken menu** (Needs, Emergency, Entertainment, Room Control).
+3. Provides **eyes-free auditory navigation** (each option is read aloud via speech synthesis, allowing bedridden patients to navigate without eye strain).
+4. Automates IoT home appliances (room lighting & multi-speed fan control via relays) and provides multi-tone local alarms with network caregiver escalation.
 
 ---
 
 ## 🌟 Key Capabilities
 
-- **🎯 100% Non-Invasive Optical Tracking**: Uses standard camera input with Google MediaPipe (468 3D landmarks); no heavy electrodes or goggles.
-- **📐 Soukupová & Čech (2016) EAR Algorithm**: Invariant to lighting changes, skin tone, and minor head movement.
-- **🎛️ 3-Tier Blink Gesture Classification (Mealy FSM)**:
-  - **Short Blink (< 0.5s)**: Cycles to the **Next** menu item (read aloud).
+- **🎯 Zero-Sensor Non-Invasive Vision**: Works entirely through standard camera optical input using Google MediaPipe (468 3D facial landmarks); requires no electrodes, glasses, or wearable hardware.
+- **📐 Mathematical EAR Algorithm (Soukupová & Čech)**: Invariant to lighting variations, skin tones, and minor head movement.
+- **🎛️ 3-Tier Blink Gesture Classifier (Mealy FSM)**:
+  - **Short Blink (< 0.5s)**: Cycles to the **Next** menu item (announced via audio).
   - **Medium Blink (~1.0s)**: **Selects** the item / drills down into submenus.
-  - **Long Blink (≥ 3.0s)**: **Cancels / Returns** to the previous menu.
-- **🗣️ Eyes-Free Auditory Prompts**: Spoken speech feedback announces every option aloud so bedridden patients can operate the system purely by sound.
+  - **Long Blink (≥ 3.0s)**: **Cancels / Returns** to the previous menu level.
+- **🗣️ Eyes-Free Auditory Prompts**: Spoken text-to-speech announces every option aloud dynamically, enabling complete eyes-free operation.
 - **💡 Smart Room Appliance Control (Moore FSM)**: Direct control over room light (Relay ON/OFF) and multi-speed ceiling fan (Speeds 0 to 3).
-- **🚨 Fail-Safe Caregiver Alerting**: Immediate priority emergency dispatch with multi-tone local buzzer alarm and Wi-Fi caregiver notification.
-- **💻 Dual Deployment Modes**: Runs 100% in **Software Simulation Mode** on any laptop/PC (with virtual appliance dashboard & audio), as well as on physical **Raspberry Pi 4 hardware**.
+- **🚨 Fail-Safe Caregiver Alerting**: Immediate priority emergency dispatch with multi-tone local buzzer alarm and network caregiver notification.
+- **💻 Dual Deployment Modes**: Runs 100% in **Software Simulation Mode** on any PC/laptop (with virtual appliance dashboard & audio), as well as on physical **Raspberry Pi 4 hardware**.
 
 ---
 
-## 🌳 Hierarchical Menu Tree
+## 🌳 Hierarchical Menu Architecture
 
 ```text
 Main Menu
@@ -56,14 +58,33 @@ Main Menu
 │   ├── Food        ──> Speaks "Need Food", notifies caregiver
 │   ├── Pain        ──> Speaks "Severe Pain assistance needed"
 │   └── Washroom    ──> Speaks "Washroom assistance needed"
-├── Emergency       ──> Immediate Priority Local Buzzer Alarm + Caregiver Distress Alert
+├── Emergency       ──> PRIORITY ALARM: Triggers local buzzer pattern + caregiver distress alert
 ├── Entertainment
 │   ├── Music       ──> Plays soothing relaxation music
 │   └── Movies      ──> Starts audio entertainment stream
 └── Room Control
     ├── Light       ──> Toggles Room Light Relay (ON / OFF)
-    └── Fan Speed   ──> Adjusts Ceiling Fan Speed (OFF ➔ 1 ➔ 2 ➔ 3)
+    └── Fan Speed   ──> Cycles Ceiling Fan Speed (OFF ➔ 1 ➔ 2 ➔ 3)
 ```
+
+---
+
+## 🧠 Engineering & System Design Deep-Dive (Interview Focus)
+
+### 1. Why MediaPipe FaceMesh (468 landmarks) over Haar Cascades or Dlib 68?
+- **Sub-millimeter palpebral fissure precision:** Haar Cascades only provide bounding boxes without eyelid distance geometry. Dlib’s 68-point model incurs high CPU latency on embedded processors. MediaPipe FaceMesh runs at **>30 FPS on standard edge CPUs** using 468 3D contour points, providing exact coordinates for both upper and lower eyelid boundaries.
+
+### 2. Geometry-Invariant Blink Formulation (Soukupová & Čech EAR)
+- Instead of brittle intensity thresholding or optical flow (which fail under ambient lighting shifts), the system computes the geometric Eye Aspect Ratio:
+  $$\text{EAR} = \frac{\|p_2 - p_6\| + \|p_3 - p_5\|}{2 \cdot \|p_1 - p_4\|}$$
+- **Thresholding Strategy:** When open, $\text{EAR} \approx 0.28 - 0.35$. Upon eye closure, $\text{EAR}$ drops below $0.22$. Temporal thresholding filters out natural involuntary blinks ($<100\text{ ms}$) while identifying deliberate communication commands.
+
+### 3. Finite State Machine: Mealy & Moore Separation
+- **Mealy FSM (`src/fsm.py`):** Operates on continuous EAR streams. State transitions depend on closure frame counts upon eye reopening, emitting discrete events (`SHORT_BLINK`, `MEDIUM_BLINK`, `LONG_BLINK`).
+- **Moore FSM (`src/fsm.py`):** Governs system state (active menu level, breadcrumb trails, appliance states, and alert timeouts). Outputs depend strictly on the current state.
+
+### 4. Multithreaded Non-Blocking I/O Architecture
+- Text-to-speech (`pyttsx3`) audio synthesis and GPIO relay control are dispatched to dedicated worker threads via thread-safe queues. This ensures that video frame ingestion and landmark extraction never stutter or drop frames during audio announcements.
 
 ---
 
@@ -121,10 +142,10 @@ python src/main.py
 
 ## 🔌 Hardware Deployment (Raspberry Pi 4)
 
-When deploying to physical hardware in the laboratory:
-- **Camera**: Raspberry Pi Camera Module v2 (connected via ribbon cable to CSI port).
+When deploying to physical hardware:
+- **Camera**: Raspberry Pi Camera Module v2 (CSI ribbon interface) or USB webcam.
 - **Relay 1 (Room Light)**: GPIO Pin 23.
-- **Relays 2 & 3 (Fan Speed)**: GPIO Pins 24 & 25.
+- **Relays 2 & 3 (Fan Speed Control)**: GPIO Pins 24 & 25.
 - **Local Alarm Buzzer**: GPIO Pin 18.
 - **Status Indicator LED**: GPIO Pin 27.
 - **Caregiver Acknowledge Button**: GPIO Pin 17.
@@ -142,6 +163,5 @@ Detailed circuit schematics are documented in [`hardware/README.md`](hardware/RE
 
 ---
 
-<p align="center">
-  Developed for B.Tech Capstone Project 2026–27 • Department of ECE, NIT Manipur
-</p>
+## 🎓 Academic Background
+*This project originated as a final-year B.Tech capstone engineering initiative at the National Institute of Technology (NIT) Manipur, Department of Electronics & Communication Engineering, developed in a collaborative 3-member team (Dilkhush Raj, Gaurav Kumar Chaudhary, Rahul Deb) under the supervision of Prof. L. Lolitkumar Singh.*

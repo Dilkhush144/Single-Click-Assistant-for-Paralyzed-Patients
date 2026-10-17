@@ -1,9 +1,7 @@
 # System Architecture & Finite State Machine Specification
 
-**Project:** Single-Click Assistant for Paralyzed Patients: An Eye-Blink Controlled Smart Assistance and Caregiver Alert System  
-**Institution:** Department of Electronics and Communication Engineering, National Institute of Technology, Manipur (2026-27)  
-**Authors:** Gaurav Kumar Chaudhary (23105026), Rahul Deb (23105031), Dilkhush Raj (23105008)  
-**Supervisor:** Prof. L. Lolitkumar Singh, NIT Manipur  
+**Project:** Single-Click Assistant for Paralyzed Patients: Real-Time Eye-Blink Controlled Assistive Workstation  
+**Author & Lead Developer:** Dilkhush Raj  
 
 ---
 
