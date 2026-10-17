@@ -1,67 +1,88 @@
-# 👁️ Single Click Assistant for Paralyzed Patients
-### *Eye-Blink Controlled Smart Assistive System*
+# 👁️ Single-Click Assistant for Paralyzed Patients
+### *An Eye-Blink Controlled Smart Assistance and Caregiver Alert System*
 
 <p align="center">
-  <strong>Non-Invasive Healthcare Interface • Real-Time Eye Blink Detection • Raspberry Pi & MediaPipe Integration</strong>
+  <strong>National Institute of Technology, Manipur</strong><br>
+  Department of Electronics and Communication Engineering • B.Tech Project (2026–27)
 </p>
 
 <p align="center">
-  An assistive healthcare communication system enabling paralyzed and locked-in patients to communicate daily care requests through single-click calibrated eye blinks using <strong>Raspberry Pi</strong>, <strong>OpenCV</strong>, and <strong>Google MediaPipe</strong>.
+  <strong>Project Team:</strong><br>
+  1. <strong>Gaurav Kumar Chaudhary</strong> (Roll: 23105026)<br>
+  2. <strong>Rahul Deb</strong> (Roll: 23105031)<br>
+  3. <strong>Dilkhush Raj</strong> (Roll: 23105008)<br><br>
+  <strong>Under the Guidance of:</strong><br>
+  <strong>Prof. L. Lolitkumar Singh</strong><br>
+  Department of Electronics and Communication Engineering, NIT Manipur
 </p>
 
 ---
 
-## 📌 Problem Statement
+## 📌 Problem Statement & Motivation
 
-Patients afflicted with advanced neurodegenerative diseases (ALS, Locked-in Syndrome) or quadriplegic paralysis cannot vocalize or physically trigger standard call buttons. However, voluntary oculomotor control (eye blinks) frequently remains intact.
+Severe paralysis (caused by Amyotrophic Lateral Sclerosis [ALS], brainstem stroke, or Locked-in Syndrome) robs patients of speech and limb movement while voluntary eye control remains functional. 
 
-This project delivers a **hands-free, non-invasive assistive communication workstation**:
-1. Monitors the patient's eyes via high-speed computer vision.
-2. Formulates Eye Aspect Ratio (EAR) metrics in real time.
-3. Classifies **Normal Blinks** (to scroll through a customizable needs menu) and **Long Blinks** (to lock in and confirm selections).
-4. Dispatches immediate multi-modal notifications: visual alerts, hardware buzzer alarms via Raspberry Pi GPIO, and automated text-to-speech synthesized caregiver voice alerts.
+Conventional calling buzzers only signal *that* assistance is needed, but cannot specify *what* the patient needs. Existing solutions often suffer from high cost, intrusive electrode headsets, or dependency on uninterrupted internet connectivity.
+
+This project delivers a **standalone, non-invasive eye-blink assistance workstation** that:
+1. Detects intentional eye blinks in real time using high-speed vision pipelines.
+2. Implements a **hierarchical spoken menu** (Needs, Emergency, Entertainment, Room Control).
+3. Reads items aloud so **no screen is strictly required** for the patient (eyes-free operation).
+4. Automates home appliances (room lighting & fan speed) and triggers offline local alarms alongside caregiver alerts.
 
 ---
 
-## 🌟 Key Features
+## 🌟 Key Capabilities
 
-- **🎯 Zero Calibration Headset Needed**: 100% optical and non-invasive; no heavy electrodes, eye-tracking goggles, or intrusive caps.
-- **⚡ High-Precision 468-Point FaceMesh**: Powered by Google MediaPipe for millimeter-accurate eye contour detection even under variable head positions.
-- **📐 Mathematical EAR Algorithm**: Implements the Soukupová & Čech Eye Aspect Ratio formula, preventing false positives from ambient lighting shifts.
-- **🎛️ Dual-State Blink Detection Engine**:
-  - **Quick Blink (3–17 frames)**: Increments the menu selection (Cycle: *Need Water* $\to$ *Need Food* $\to$ *Washroom* $\to$ *Emergency*).
-  - **Long Sustained Blink (18+ frames)**: Confirms selection and triggers caretaker alerts.
-- **🔊 Multi-Channel Dispatch**:
-  - **Text-to-Speech (TTS)**: Voice output announces patient needs clearly.
-  - **Physical GPIO Alarm**: Drives 5V active buzzer and LED indicator array on Raspberry Pi.
-  - **Visual HUD**: On-screen dynamic overlay with EAR telemetry and status confirmation.
+- **🎯 100% Non-Invasive Optical Tracking**: Uses standard camera input with Google MediaPipe (468 3D landmarks); no heavy electrodes or goggles.
+- **📐 Soukupová & Čech (2016) EAR Algorithm**: Invariant to lighting changes, skin tone, and minor head movement.
+- **🎛️ 3-Tier Blink Gesture Classification (Mealy FSM)**:
+  - **Short Blink (< 0.5s)**: Cycles to the **Next** menu item (read aloud).
+  - **Medium Blink (~1.0s)**: **Selects** the item / drills down into submenus.
+  - **Long Blink (≥ 3.0s)**: **Cancels / Returns** to the previous menu.
+- **🗣️ Eyes-Free Auditory Prompts**: Spoken speech feedback announces every option aloud so bedridden patients can operate the system purely by sound.
+- **💡 Smart Room Appliance Control (Moore FSM)**: Direct control over room light (Relay ON/OFF) and multi-speed ceiling fan (Speeds 0 to 3).
+- **🚨 Fail-Safe Caregiver Alerting**: Immediate priority emergency dispatch with multi-tone local buzzer alarm and Wi-Fi caregiver notification.
+- **💻 Dual Deployment Modes**: Runs 100% in **Software Simulation Mode** on any laptop/PC (with virtual appliance dashboard & audio), as well as on physical **Raspberry Pi 4 hardware**.
+
+---
+
+## 🌳 Hierarchical Menu Tree
+
+```text
+Main Menu
+├── Needs
+│   ├── Water       ──> Speaks "Need Water", notifies caregiver
+│   ├── Food        ──> Speaks "Need Food", notifies caregiver
+│   ├── Pain        ──> Speaks "Severe Pain assistance needed"
+│   └── Washroom    ──> Speaks "Washroom assistance needed"
+├── Emergency       ──> Immediate Priority Local Buzzer Alarm + Caregiver Distress Alert
+├── Entertainment
+│   ├── Music       ──> Plays soothing relaxation music
+│   └── Movies      ──> Starts audio entertainment stream
+└── Room Control
+    ├── Light       ──> Toggles Room Light Relay (ON / OFF)
+    └── Fan Speed   ──> Adjusts Ceiling Fan Speed (OFF ➔ 1 ➔ 2 ➔ 3)
+```
 
 ---
 
 ## 🛠️ System Architecture & Tech Stack
 
-| Domain | Technology / Module | Purpose |
+| Domain | Technology | Role |
 |---|---|---|
-| **Edge Compute** | **Raspberry Pi 4 / 3B+ / PC** | On-device execution and hardware interfacing |
-| **Vision AI** | **Google MediaPipe Face Mesh** | 468 3D facial landmark localization |
-| **Image Processing** | **OpenCV (Python)** | Video streaming, geometric overlays, and UI rendering |
-| **Math / Array Logic** | **NumPy** | Vectorized Euclidean distance & EAR computation |
-| **Audio Synthesizer** | **pyttsx3** | Offline Text-to-Speech audio notification |
-| **Hardware I/O** | **RPi.GPIO** | Direct physical control of buzzers and LED signals |
-
-```text
-[Camera Feed] ──> [OpenCV Preprocessing] ──> [MediaPipe Mesh] ──> [EAR Calculation]
-                                                                        │
-                   ┌────────────────────────────────────────────────────┘
-                   ▼
-       [Blink Duration Classifier]
-       ├── Short Blink: Navigate Option [1 -> 2 -> 3 -> 4]
-       └── Long Blink:  Confirm Request ──> [Audio Speech] + [GPIO Buzzer/LEDs]
-```
+| **Platform** | **Raspberry Pi 4 / PC / Laptop** | Core edge processor & runtime environment |
+| **Vision AI** | **Google MediaPipe Face Mesh** | Real-time 468-point 3D facial landmark localization |
+| **Vision Framework** | **OpenCV (Python)** | Video capture, frame preprocessing, and HUD overlay |
+| **Blink Mathematics** | **NumPy & EAR Formulation** | Palpebral fissure vector distance calculation |
+| **Speech Synthesizer** | **pyttsx3** | Real-time offline Text-to-Speech audio prompts |
+| **Physical I/O** | **RPi.GPIO** | Direct 5V relay control for light/fan and buzzer |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quickstart Guide (Running on Laptop / PC)
+
+You can run the full system right now on your Windows/Linux/Mac laptop without any extra hardware:
 
 ### 1. Clone the Repository
 ```bash
@@ -69,71 +90,58 @@ git clone https://github.com/Dilkhush144/Single-Click-Assistant-for-Paralyzed-Pa
 cd Single-Click-Assistant-for-Paralyzed-Patients
 ```
 
-### 2. Create and Activate Virtual Environment
+### 2. Set Up Virtual Environment & Dependencies
 ```bash
 python -m venv venv
-# On Linux / macOS / Raspberry Pi:
-source venv/bin/activate
 # On Windows:
 venv\Scripts\activate
-```
+# On Linux/Raspberry Pi:
+source venv/bin/activate
 
-### 3. Install Dependencies
-```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the Communicator
+### 3. Launch the Assistant
 ```bash
 python src/main.py
 ```
-> Press `q` to safely exit the application and release camera resources.
+
+### 4. Interactive Controls
+- **Blink Normally**: Natural blinks are filtered out.
+- **Short Blink (< 0.5s)**: Cycles to the next menu item with spoken audio prompt.
+- **Medium Blink (~1.0s)**: Confirms and selects the current item.
+- **Long Blink (≥ 3.0s)**: Returns to previous menu / Cancel.
+- **Keyboard Simulation Fallbacks**:
+  - `n` = Simulate Short Blink (Next)
+  - `s` = Simulate Medium Blink (Select)
+  - `b` = Simulate Long Blink (Back)
+  - `q` or `ESC` = Exit Application
 
 ---
 
-## 🔌 Hardware Setup
+## 🔌 Hardware Deployment (Raspberry Pi 4)
 
-For complete wiring schematics, resistor values, and pin-out diagrams for Raspberry Pi, review the dedicated guide:  
-👉 **[Hardware Interfacing Guide](hardware/README.md)**
+When deploying to physical hardware in the laboratory:
+- **Camera**: Raspberry Pi Camera Module v2 (connected via ribbon cable to CSI port).
+- **Relay 1 (Room Light)**: GPIO Pin 23.
+- **Relays 2 & 3 (Fan Speed)**: GPIO Pins 24 & 25.
+- **Local Alarm Buzzer**: GPIO Pin 18.
+- **Status Indicator LED**: GPIO Pin 27.
+- **Caregiver Acknowledge Button**: GPIO Pin 17.
 
----
-
-## 📁 Repository Structure
-
-```text
-AI-Assistive-Vision-Patient-Communicator/
-├── config/
-│   └── settings.py          # Thresholds, GPIO pinouts, and care options
-├── docs/
-│   └── architecture.md      # Mathematical formulations and dataflow
-├── hardware/
-│   └── README.md            # Raspberry Pi pinout & circuit wiring guide
-├── src/
-│   ├── ear_calculator.py    # Vectorized Eye Aspect Ratio math
-│   ├── detector.py          # MediaPipe FaceMesh eye tracking module
-│   ├── notifier.py          # Multithreaded TTS & GPIO buzzer alerts
-│   ├── ui.py                # OpenCV HUD interface
-│   └── main.py              # Main real-time execution loop
-├── .gitignore
-├── LICENSE
-├── README.md
-└── requirements.txt
-```
+Detailed circuit schematics are documented in [`hardware/README.md`](hardware/README.md).
 
 ---
 
-## 👨‍💻 Project Developer
+## 📚 References
 
-**Dilkhush Raj**  
-B.Tech — Electronics and Communication Engineering  
-National Institute of Technology (NIT) Manipur  
-
-- **GitHub**: [@Dilkhush144](https://github.com/Dilkhush144)  
-- **LinkedIn**: [Dilkhush Raj](https://www.linkedin.com/in/dilkhushraj)  
-- **Email**: [kdilkhush844@gmail.com](mailto:kdilkhush844@gmail.com)  
+1. S. Soukupová and J. Čech, *"Real-time eye blink detection using facial landmarks,"* in Proc. 21st Computer Vision Winter Workshop (CVWW), 2016.
+2. Meghana S., Monica R., Nayana K., and Neha S. S., *"Eye Blink Detection Method for Disabled: Assisting System for Paralyzed,"* IJERT, vol. 8, no. 15, NCAIT, 2020.
+3. C. Lugaresi et al., *"MediaPipe: A Framework for Building Perception Pipelines,"* in Proc. 3rd Workshop on Computer Vision for AR/VR at IEEE CVPR, 2019.
+4. K. N. D. Malleswararao et al., *"Economic Autonomous Assistive Bot with Cloud Integrated Eye Tracking and Morse Code for Paralyzed Patients,"* IJERD, vol. 21, no. 4, pp. 154-157, Apr. 2025.
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+<p align="center">
+  Developed for B.Tech Capstone Project 2026–27 • Department of ECE, NIT Manipur
+</p>
