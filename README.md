@@ -161,7 +161,5 @@ Detailed circuit schematics are documented in [`hardware/README.md`](hardware/RE
 3. C. Lugaresi et al., *"MediaPipe: A Framework for Building Perception Pipelines,"* in Proc. 3rd Workshop on Computer Vision for AR/VR at IEEE CVPR, 2019.
 4. K. N. D. Malleswararao et al., *"Economic Autonomous Assistive Bot with Cloud Integrated Eye Tracking and Morse Code for Paralyzed Patients,"* IJERD, vol. 21, no. 4, pp. 154-157, Apr. 2025.
 
----
-
-## 🎓 Academic Background
-*This project originated as a final-year B.Tech capstone engineering initiative at the National Institute of Technology (NIT) Manipur, Department of Electronics & Communication Engineering, developed in a collaborative 3-member team (Dilkhush Raj, Gaurav Kumar Chaudhary, Rahul Deb) under the supervision of Prof. L. Lolitkumar Singh.*
+## 📄 License
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
