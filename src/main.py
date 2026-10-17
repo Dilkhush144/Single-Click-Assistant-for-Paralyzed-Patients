@@ -7,10 +7,11 @@ from src.notifier import CaretakerNotifier
 
 def main():
     config = load_config()
-    print("=" * 60)
-    print(" AI Assistive Vision Communicator - Patient Assistance System")
-    print(" Author: Dilkhush Raj | Raspberry Pi & MediaPipe Pipeline")
-    print("=" * 60)
+    print("=" * 65)
+    print(" Single Click Assistant for Paralyzed Patients")
+    print(" Eye-Blink Controlled Smart Assistance | Raspberry Pi & MediaPipe")
+    print(" Author: Dilkhush Raj")
+    print("=" * 65)
 
     cap = cv2.VideoCapture(config.get("camera_index", 0))
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, config.get("frame_width", 640))

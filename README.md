@@ -1,11 +1,12 @@
-# 👁️ AI Assistive Vision Communicator for Paralyzed Patients
+# 👁️ Single Click Assistant for Paralyzed Patients
+### *Eye-Blink Controlled Smart Assistive System*
 
 <p align="center">
   <strong>Non-Invasive Healthcare Interface • Real-Time Eye Blink Detection • Raspberry Pi & MediaPipe Integration</strong>
 </p>
 
 <p align="center">
-  An edge-AI assistive healthcare system enabling completely paralyzed and locked-in patients to communicate daily care requests through calibrated eye blinks using <strong>Raspberry Pi</strong>, <strong>OpenCV</strong>, and <strong>Google MediaPipe</strong>.
+  An assistive healthcare communication system enabling paralyzed and locked-in patients to communicate daily care requests through single-click calibrated eye blinks using <strong>Raspberry Pi</strong>, <strong>OpenCV</strong>, and <strong>Google MediaPipe</strong>.
 </p>
 
 ---
@@ -64,8 +65,8 @@ This project delivers a **hands-free, non-invasive assistive communication works
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Dilkhush144/AI-Assistive-Vision-Patient-Communicator.git
-cd AI-Assistive-Vision-Patient-Communicator
+git clone https://github.com/Dilkhush144/Single-Click-Assistant-for-Paralyzed-Patients.git
+cd Single-Click-Assistant-for-Paralyzed-Patients
 ```
 
 ### 2. Create and Activate Virtual Environment
